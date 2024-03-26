@@ -1,0 +1,14 @@
+#include <stdio.h>
+void generate_addition(int result_reg, int operand1_reg, int operand2_reg) {
+   printf("ADD R%d, R%d, R%d\n", result_reg, operand1_reg, operand2_reg);
+}
+void generate_subtraction(int result_reg, int operand1_reg, int operand2_reg) {
+    printf("SUB R%d, R%d, R%d\n", result_reg, operand1_reg, operand2_reg);
+}
+int main() {
+   int a, b, c, d;
+    int reg_a = 1, reg_b = 2, reg_c = 3, reg_d = 4;
+    generate_addition(reg_a, reg_b, reg_c);
+     generate_subtraction(reg_a, reg_a, reg_d);
+   return 0;
+}
