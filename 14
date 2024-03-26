@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+typedef struct {
+    char operation;
+    char operand1[10];
+    char operand2[10];
+    char result[10];
+    bool isComputed; 
+} Expression;
+void optimizeExpressions(Expression expressions[], int numExpressions) {
+    for (int i = 0; i < numExpressions; i++) {
+        if (!expressions[i].isComputed) {
+            for (int j = i + 1; j < numExpressions; j++) {
+                if (!expressions[j].isComputed && strcmp(expressions[i].operand1, expressions[j].operand1) == 0 &&
+                    strcmp(expressions[i].operand2, expressions[j].operand2) == 0 &&
+                    expressions[i].operation == expressions[j].operation) {
+                    strcpy(expressions[j].result, expressions[i].result);
+                    expressions[j].isComputed = true;
+                }
+            }
+        }
+    }
+}
+void printOptimizedExpressions(Expression expressions[], int numExpressions) {
+    printf("Optimized Expressions:\n");
+    for (int i = 0; i < numExpressions; i++) {
+        if (!expressions[i].isComputed) {
+            printf("%s = %s %c %s\n", expressions[i].result, expressions[i].operand1,
+                   expressions[i].operation, expressions[i].operand2);
+        }
+    }
+}
+
+int main() {
+    Expression expressions[] = {
+        {'+', "a", "b", "t1", false},
+        {'*', "t1", "c", "t2", false},
+        {'-', "t2", "d", "result", false}
+    };
+
+    int numExpressions = sizeof(expressions) / sizeof(expressions[0]);
+
+  
+    optimizeExpressions(expressions, numExpressions);
+
+    printOptimizedExpressions(expressions, numExpressions);
+
+    return 0;
+}
