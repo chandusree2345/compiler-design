@@ -1,0 +1,48 @@
+Skip to content
+saicharan1234402
+/
+csa1463compilerdesign
+
+Type / to search
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+Commit
+Create 36
+ Loading branch information
+@saicharan1234402
+saicharan1234402 committed 1 hour ago 
+1 parent 1794173
+commit 65ccaf3
+Showing 1 changed file with 23 additions and 0 deletions.
+ 23 changes: 23 additions & 0 deletions23  
+36
+@@ -0,0 +1,23 @@
+
+%option noyywrap
+
+%{
+#include <stdio.h>
+int flag = 0;
+%}
+
+%%
+
+[aeiouAEIOU].[a-zA-Z0-9.]+ { flag = 1; }
+[a-zA-Z0-9]+
+
+%%
+
+int main() {
+    yylex();
+    if (flag == 1)
+        printf("Accepted\n");
+    else
+        printf("Not Accepted\n");
+    return 0;
+}
